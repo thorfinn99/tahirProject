@@ -1,43 +1,77 @@
-import { setSearchQuery } from '@/redux/jobSlice';
-import { ButtonIcon } from '@radix-ui/react-icons'
-import { Search } from 'lucide-react'
-import React, { useState } from 'react'
-import { FaSearch } from "react-icons/fa";
+import { setSearchData } from '@/redux/roomSlice';
+import React, { useState, useRef } from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion'
 
+const images = [
+    'https://ramadaencorebareilly.com/wp-content/uploads/2024/07/Day-Use-room-in-Bareilly-Ramada-Encore-Bareilly-hotel.jpg',
+    'https://dq5r178u4t83b.cloudfront.net/wp-content/uploads/sites/125/2021/08/11060441/deluxe_harbour_web.jpg',
+    'https://media.cnn.com/api/v1/images/stellar/prod/140127103345-peninsula-shanghai-deluxe-mock-up.jpg?q=w_2226,h_1449,x_0,y_0,c_fill',
+    'https://cf.bstatic.com/xdata/images/hotel/max1024x768/508100158.jpg?k=f280d44e9c3b1300dbca2fb2d8931345642c50146189519266ddbaaa8d452abc&o=&hp=1',
+];
 
-function Hero() {
-  const [query, setQuery] = useState("")
+const Hero = () => {
+  const [heroImage, setHeroImage] = useState(images[0]); // Default hero image
+  const heroSectionRef = useRef(null); // Ref to scroll to the hero section
   const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const searchJobHandler = () => {
-      dispatch(setSearchQuery(query))
-      navigate("/browse")
+
+  const handleImageClick = (image) => {
+    setHeroImage(image); // Update hero image on click
+
+    // Scroll to hero section smoothly
+    if (heroSectionRef.current) {
+      heroSectionRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
   }
-  
+
+  const goToRooms = () => {
+    navigate('/rooms')
+    dispatch(setSearchData({ startDate: "", endDate: "" }));
+  }
+
   return (
     <div>
-      <motion.div initial={{opacity:0,y:50}}
-                  animate={{opacity:1,y:0}}
-                  exit={{opacity:0,y:-50}}
-                  transition={{duration:0.4}} class="text-center  " >
-        <div className='flex flex-col gap-5 my-10' >
-        <span class="mx-auto md:px-4 px-2 py-1 md:py-2 rounded-full bg-gray-100 text-[#F83002] md:text-xl text-sm md:font-medium " >No 1 Job Hunt Website</span>
-        <h1 class="md:text-5xl text-4xl font-bold">Search, Apply & <br/> Get Your <span className='text-[#6A38C2]' >Dream Job</span></h1>
-        <p className='md:text-1xl mx-10 md:mx-20 md:leading-none leading-tight'>Discover <span className="text-[#6A38C2] font-semibold">endless opportunities</span>, connect with <span className="text-[#F83002] font-semibold">top companies</span>, and step confidently into your future.  Let your skills shine and <span className="text-[#6A38C2] font-semibold">find the role</span> that’s right for you!</p>
-        <div className='flex w-[85%] md:w-[52%] shadow-lg border border-gray-200 pl-3 rounded-full items-center gap-4 md:mb-5 mx-auto ' >
-          <input onChange={(e)=> setQuery(e.target.value)} type="text" placeholder='Find Your Dream Job' className='outline-none p-2 text-1xl border-none w-full' />
-          <div onClick={searchJobHandler} className='text-white bg-[#6A38C2] cursor-pointer hover-bg-[#2b1356] p-4 rounded-r-full ' >
-          <button><FaSearch className=' ' /></button>
+      {/* Hero Section */}
+      <div 
+        ref={heroSectionRef}
+        className="relative w-full z-10 h-screen bg-cover bg-center"
+        style={{ backgroundImage: `url(${heroImage})` }}
+      >
+        <div className="absolute inset-0 bg-black opacity-50"></div>
+        <div className="absolute inset-0 flex justify-center items-center text-white text-center">
+          <div>
+            <h1 className="text-4xl md:text-6xl font-bold mb-4">Welcome to <span className='text-yellow-400' >MJPRU</span> Guest House</h1>
+            <p className="text-xl md:text-2xl mb-6">Your comfort is our priority</p>
+            <button onClick={goToRooms} className="px-6 py-3 bg-white text-gray-800 font-semibold rounded-md hover:bg-opacity-80 transition duration-300">
+              Book Room
+            </button>
           </div>
         </div>
-        </div>
-      </motion.div>
+      </div>
+
+      {/* Gallery Section */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className="relative overflow-hidden rounded-lg cursor-pointer"
+            onClick={() => handleImageClick(image)} // Set hero image on click and scroll to hero
+          >
+            <img 
+              src={image} 
+              alt={`Gallery ${index + 1}`} 
+              className="w-full h-full object-cover transform transition-transform duration-300 hover:scale-110" 
+            />
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
 
-export default Hero
+export default Hero;

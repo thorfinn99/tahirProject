@@ -1,4 +1,3 @@
-import { setAllJobs } from '@/redux/jobSlice'
 import { JOB_API_END_POINT } from '@/utils/constant'
 import { useSelect } from '@material-tailwind/react'
 import axios from 'axios'

@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom"; // Use react-router-dom for routing in Vite
-// Use standard HTML <img> in place of Next.js Image component
 
 const transition = {
   type: "spring",

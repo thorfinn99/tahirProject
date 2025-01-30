@@ -4,16 +4,19 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Login from './components/auth/Login'
 import SignUp from './components/auth/SignUp'
 import Home from './components/Home'
-import Jobs from './components/ui/Jobs'
-import Browse from './components/ui/Browse'
 import Profile from './components/ui/Profile'
-import JobDescription from './components/ui/JobDescription'
-import Companies from './components/admin/Companies'
-import CompanyCreate from './components/admin/CompanyCreate'
-import CompanySetup from './components/admin/CompanySetup'
-import AdminJobs from './components/admin/AdminJobs'
-import PostJobs from './components/admin/PostJobs'
-import Applicants from './components/admin/Applicants'
+import Admin from './components/admin/Admin'
+import Booking from './components/ui/Booking'
+import CreateRoom from './components/admin/CreateRoom'
+import Rooms from './components/admin/Rooms'
+import Room from './components/admin/Room'
+import Success from './components/ui/Success'
+import ManageBookings from './components/admin/ManageBookings'
+import roomDetail from './components/ui/roomDetail'
+import RoomDetail from './components/ui/roomDetail'
+import BookRooms from './components/ui/BookRooms'
+import Contact from './components/ui/Contact'
+import ManageQueries from './components/admin/manageQueries'
 
 const appRouter = createBrowserRouter([
   {
@@ -29,46 +32,58 @@ const appRouter = createBrowserRouter([
     element:<SignUp />
   },
   {
-    path:'/jobs',
-    element:<Jobs />
-  },
-  {
-    path:'/browse',
-    element:<Browse />
+    path:'/Rooms',
+    element:<BookRooms />
   },
   {
     path:'/profile',
     element:<Profile />
   },
   {
-    path:'/description/:id',
-    element:<JobDescription />
+    path:'/myBookings',
+    element:<Booking />
   },
+  {
+    path: '/success',
+    element: <Success />
+  },
+  {
+    path: '/room/details',
+    element: <RoomDetail />
+  },
+  {
+    path: '/contact',
+    element: <Contact />
+  },
+
+
   // admin routes
   {
-    path:'/admin/companies',
-    element: <Companies />
+    path: '/admin',
+    element: <Admin />
   },
   {
-    path:'/admin/companies/create',
-    element: <CompanyCreate />
+    path: '/create/room',
+    element: <CreateRoom />
   },
   {
-    path:'/admin/companies/:id',
-    element: <CompanySetup />
+    path: '/browse/rooms',
+    element: <Rooms />
   },
   {
-    path:'/admin/jobs',
-    element: <AdminJobs />
+    path: '/browse/room',
+    element: <Room />
   },
   {
-    path:'/admin/jobs/create',
-    element: <PostJobs />
+    path: '/manage/bookings',
+    element: <ManageBookings />
   },
   {
-    path:'/admin/jobs/:id/applicants',
-    element: <Applicants />
+    path: '/manage/queries',
+    element: <ManageQueries />
   },
+  
+
 ])
 
 function App() {
