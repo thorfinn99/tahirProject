@@ -1,6 +1,16 @@
 {
+  "homepage": "https://thorfinn99.github.io/guest-house-react",
   "dependencies": {
-    "moment": "^2.30.1"
+    "moment": "^2.30.1",
+    "react-scripts": "^5.0.1"
+  },
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "devDependencies": {
     "gh-pages": "^6.3.0"
