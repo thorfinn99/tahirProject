@@ -5,7 +5,6 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { IoMail } from "react-icons/io5";
 import UpdateProfileDialog from "../UpdateProfileDialog";
 import { useDispatch, useSelector } from "react-redux";
-import { USER_API_END_POINT } from "@/utils/constant";
 import { setUser } from "@/redux/authSlice";
 import { toast } from "sonner";
 import axios from "axios";
@@ -45,7 +44,7 @@ function Profile() {
       
       try {
         setLoading(true)
-        const res = await axios.post(`${USER_API_END_POINT}/profile/update`, formData, {
+        const res = await axios.post(`${import.meta.env.VITE_USER_API_END_POINT}/profile/update`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data' },
             withCredentials:true

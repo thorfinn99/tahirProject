@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { USER_API_END_POINT } from "@/utils/constant";
 import Navbar from "../shared/Navbar";
 import { useSelector } from "react-redux";
 import { toast } from "sonner";
@@ -33,7 +32,7 @@ const Contact = () => {
     }
     try {
       const res = await axios.post(
-        `${USER_API_END_POINT}/contact`,
+        `${import.meta.env.VITE_USER_API_END_POINT}/contact`,
         formData,
         { withCredentials: true }
       );

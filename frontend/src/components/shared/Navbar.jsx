@@ -10,7 +10,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { IoHome } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { USER_API_END_POINT } from '@/utils/constant';
 import { setUser } from "@/redux/authSlice";
 import { toast } from "sonner";
 import { MdOutlineRestaurantMenu } from "react-icons/md";
@@ -27,7 +26,7 @@ function Navbar() {
   const logoutHandler = async () => {
     try {
       console.log("Button clicked");
-      const res = await axios.get(`${USER_API_END_POINT}/logout`, { withCredentials: true });
+      const res = await axios.get(`${import.meta.env.VITE_USER_API_END_POINT}/logout`, { withCredentials: true });
       if (res.data.success) {
         dispatch(setUser(null));
         navigate("/");

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { USER_API_END_POINT } from "@/utils/constant";
 import Navbar from "../shared/Navbar";
 
 const ManageQueries = () => {
@@ -9,7 +8,7 @@ const ManageQueries = () => {
   useEffect(() => {
     const fetchQueries = async () => {
       try {
-        const res = await axios.get(`${USER_API_END_POINT}/get/contact`, { withCredentials: true });
+        const res = await axios.get(`${import.meta.env.VITE_USER_API_END_POINT}/get/contact`, { withCredentials: true });
         console.log(res.data);
         
         if (res.data.success) {
