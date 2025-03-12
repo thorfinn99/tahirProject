@@ -26,27 +26,26 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.use(
-    cors({
-        origin: (origin, callback) => {
-            const allowedOrigins = [
-                'http://localhost:5173',
-                'https://jobhuntfrontend.onrender.com',
-                'https://guest-house-frontend.vercel.app',
-                'https://guest-house-frontend-git-main-mohammad-anas-projects-290bb13b.vercel.app'
-            ];
+app.use(cors({
+    origin: [
+        'http://localhost:5173',
+        'https://jobhuntfrontend.onrender.com',
+        'https://guest-house-frontend.vercel.app',
+        'https://guest-house-frontend-git-main-mohammad-anas-projects-290bb13b.vercel.app'
+    ],
+    credentials: true,
+}));
 
-            if (!origin || allowedOrigins.includes(origin)) {
-                callback(null, true);
-            } else {
-                callback(new Error('Not allowed by CORS'));
-            }
-        },
-        credentials: true,
-        methods: ['GET', 'POST', 'PUT', 'DELETE'],
-        allowedHeaders: ['Content-Type', 'Authorization']
-    })
-);
+// Handle preflight requests
+app.options('*', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.status(200).end();
+});
+
+
 
 // Routes
 app.use("/api/v1/user", userRoute);
